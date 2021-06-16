@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Havret.Collections.Extensions</AssemblyName>
+    <RootNamespace>Havret.Collections.Extensions</RootNamespace>
+  </PropertyGroup>
+
+</Project>
