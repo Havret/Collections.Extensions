@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace Havret.Collections.Extensions
 {
@@ -17,6 +18,7 @@ namespace Havret.Collections.Extensions
         {
         }
 
+        
         public void Insert(T key)
         {
             // double size of array if necessary
@@ -29,6 +31,8 @@ namespace Havret.Collections.Extensions
             _pq[++_n] = key;
             Swim(_n);
         }
+
+        public T Min => _pq[1];
 
         public T DeleteMin()
         {
@@ -47,12 +51,16 @@ namespace Havret.Collections.Extensions
 
         private void Swim(int k)
         {
-            while (k > 1 && Greater(k / 2, k))
+            while (k > 1 && Greater(GetParent(k), k))
             {
-                Exchange(k / 2, k);
+                Exchange(GetParent(k), k);
                 k /= 2;
             }
         }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static int GetParent(int k) => k / 2;
+
 
         private void Resize(int capacity)
         {
@@ -85,16 +93,8 @@ namespace Havret.Collections.Extensions
             }
         }
 
-        private bool Greater(int i, int j)
-        {
-            return _pq[i].CompareTo(_pq[j]) > 0;
-        }
+        private bool Greater(int i, int j) => _pq[i].CompareTo(_pq[j]) > 0;
 
-        private void Exchange(int i, int j)
-        {
-            T temp = _pq[i];
-            _pq[i] = _pq[j];
-            _pq[j] = temp;
-        }
+        private void Exchange(int i, int j) => (_pq[i], _pq[j]) = (_pq[j], _pq[i]);
     }
 }

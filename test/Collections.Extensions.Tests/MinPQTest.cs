@@ -1,4 +1,3 @@
-using System;
 using Havret.Collections.Extensions;
 using Xunit;
 
@@ -20,8 +19,10 @@ namespace Collections.Extensions.Tests
             minPQ.Insert(6);
             minPQ.Insert(5);
             minPQ.Insert(10);
-            
-            for (int i = 1; i < 11; i++) {
+
+            for (int i = 1; i < 11; i++)
+            {   
+                Assert.Equal(i, minPQ.Min);
                 Assert.Equal(i, minPQ.DeleteMin());
             }
         }
